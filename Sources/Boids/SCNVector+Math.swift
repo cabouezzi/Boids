@@ -34,20 +34,20 @@ internal extension SCNVector3 {
         lhs.z -= rhs.z
     }
     
-    static func * (lhs: SCNVector3, rhs: CGFloat) -> SCNVector3 {
+    static func * (lhs: SCNVector3, rhs: Float) -> SCNVector3 {
         return SCNVector3(lhs.x * rhs, lhs.y * rhs, lhs.z * rhs)
     }
     
-    static func / (lhs: SCNVector3, rhs: CGFloat) -> SCNVector3 {
+    static func / (lhs: SCNVector3, rhs: Float) -> SCNVector3 {
         return SCNVector3(lhs.x / rhs, lhs.y / rhs, lhs.z / rhs)
     }
     
-    static func *= (lhs: inout SCNVector3, rhs: CGFloat) {
+    static func *= (lhs: inout SCNVector3, rhs: Float) {
         lhs.x *= rhs
         lhs.y *= rhs
         lhs.z *= rhs
     }
-    static func /= (lhs: inout SCNVector3, rhs: CGFloat) {
+    static func /= (lhs: inout SCNVector3, rhs: Float) {
         lhs.x /= rhs
         lhs.y /= rhs
         lhs.z /= rhs
@@ -68,7 +68,7 @@ internal extension SCNVector3 {
         return SCNVector3(0, 0, 0)
     }
     
-    func distanceTo (_ otherVector: SCNVector3) -> CGFloat {
+    func distanceTo (_ otherVector: SCNVector3) -> Float {
         let xDistance = abs(otherVector.x - x)
         let yDistance = abs(otherVector.y - y)
         let zDistance = abs(otherVector.z - z)
@@ -76,7 +76,7 @@ internal extension SCNVector3 {
         return sqrt(pow(xDistance, 2) + pow(yDistance, 2) + pow(zDistance, 2))
     }
     
-    func magnitude () -> CGFloat {
+    func magnitude () -> Float {
         if self == SCNVector3.zero { return 0 }
         return distanceTo(SCNVector3.zero)
     }
@@ -89,7 +89,7 @@ internal extension SCNVector3 {
     }
     
     /// Scales the vector to the given magnitude
-    mutating func setMagnitude (_ magnitude: CGFloat) {
+    mutating func setMagnitude (_ magnitude: Float) {
         self = normalized() * magnitude
     }
 }

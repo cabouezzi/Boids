@@ -40,7 +40,7 @@ public class DroneController{
     }
     
     func closestBoid(to boid: Boid) -> Boid? {
-        var closestDistance: CGFloat?
+        var closestDistance: Float?
         var closestBoid:( any Boid)?
         
         for other in boids where other !== boid {
@@ -60,7 +60,7 @@ public class DroneController{
         var flockmatesInView: Int = 0
         var flockmatesCenter = SCNVector3.zero
         var averageFlockDirection = SCNVector3.zero
-        var averageSeparationDistance: CGFloat = 0
+        var averageSeparationDistance: Float = 0
         
         //Scan for neighboring drones
         for other in boids where other !== boid {
@@ -82,9 +82,9 @@ public class DroneController{
                                     averageSeparationDirection: .zero)
         }
         
-        flockmatesCenter = flockmatesCenter / CGFloat(flockmatesInView)
-        averageFlockDirection = averageFlockDirection / CGFloat(flockmatesInView)
-        averageSeparationDistance = averageSeparationDistance / CGFloat(flockmatesInView)
+        flockmatesCenter = flockmatesCenter / Float(flockmatesInView)
+        averageFlockDirection = averageFlockDirection / Float(flockmatesInView)
+        averageSeparationDistance = averageSeparationDistance / Float(flockmatesInView)
         
         // Clips magnitude to minimum separation
         if averageSeparationDistance < boid.boidSettings.minSeparationDistance {

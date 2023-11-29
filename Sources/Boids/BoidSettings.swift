@@ -8,30 +8,30 @@ import SceneKit
 
 public struct BoidSettings {
     /// Minimum speed of the drone.
-    public var minSpeed: CGFloat = 0.1
+    public var minSpeed: Float = 0.1
     /// Maximum speed of the drone.
-    public var maxSpeed: CGFloat = 4
+    public var maxSpeed: Float = 4
     /// The radius of the boid to be aware of other drones.
-    public var perceptionRadius: CGFloat = 5
+    public var perceptionRadius: Float = 5
     /// Minimum separation between drones.
-    public var minSeparationDistance: CGFloat = 1
+    public var minSeparationDistance: Float = 1
     /// The maximum steering capability of the drone.
-    public var maxSteerForce: CGFloat = 3
+    public var maxSteerForce: Float = 3
     
     /// The weight of the force that attracts the drone to a target node.
-    public var targetForceWeight: CGFloat = 5
+    public var targetForceWeight: Float = 5
     
     /// The weight of the force to travel in the same direction as other drones.
-    public var alignmentForceWeight: CGFloat = 2
+    public var alignmentForceWeight: Float = 2
     /// The weight of the force that brings the boid closer to other drones.
-    public var cohesionForceWeight: CGFloat = 1
-    /// The weight of the force to keep a separation CGFloat between other drones.
-    public var separationForceWeight: CGFloat = 5
+    public var cohesionForceWeight: Float = 1
+    /// The weight of the force to keep a separation Float between other drones.
+    public var separationForceWeight: Float = 5
     
     /// The weight of the force to avoid obstacles.
-    public var avoidanceForceWeight: CGFloat = 50
+    public var avoidanceForceWeight: Float = 50
     /// The distance to which the drone recognizes obstacles.
-    public var avoidDistance: CGFloat = 1
+    public var avoidDistance: Float = 1
     
     /// An array of the drone's percieved directions in a spherical radius with a magnitude of 1.
     private(set) var directions: [(asVector: SCNVector3, asEulerAngles: SCNVector3)] = []

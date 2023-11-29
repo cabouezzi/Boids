@@ -57,7 +57,7 @@ extension Boid {
             acceleration.setMagnitude(boidSettings.maxSteerForce)
         }
         
-        velocity += acceleration * CGFloat(world.timeStep)
+        velocity += acceleration * Float(world.timeStep)
         
         //Clip to minimum speed
         if velocity.magnitude() < boidSettings.minSpeed {
@@ -69,7 +69,7 @@ extension Boid {
         }
         
         updateRotation()
-        worldPosition += velocity * CGFloat(world.timeStep)
+        worldPosition += velocity * Float(world.timeStep)
     }
     
     ///Updates the rotation of the node. Default is to face the +Z direction of the velocity.
@@ -91,7 +91,7 @@ extension Boid {
         }
     }
     
-    private func distanceToCollision(_ world: SCNPhysicsWorld) -> CGFloat? {
+    private func distanceToCollision(_ world: SCNPhysicsWorld) -> Float? {
         let results = world.rayTestWithSegment(from: worldPosition, to: worldPosition + velocity * boidSettings.avoidDistance, options: [.backfaceCulling : false, .collisionBitMask : 1])
         
         // Hits something that's not a boid
@@ -104,7 +104,7 @@ extension Boid {
     
     private func unobstructedDirection(_ world: SCNPhysicsWorld) -> SCNVector3 {
         var mostPromising = velocity
-        var longest: CGFloat = 0
+        var longest: Float = 0
         var best: SCNVector3?
         
         for direction in boidSettings.directions {

@@ -8,30 +8,30 @@ import SceneKit
 
 public struct BoidSettings {
     /// Minimum speed of the drone.
-    public var minSpeed: Float = 0.1
+    public var minSpeed: BFloat = 0.1
     /// Maximum speed of the drone.
-    public var maxSpeed: Float = 4
+    public var maxSpeed: BFloat = 4
     /// The radius of the boid to be aware of other drones.
-    public var perceptionRadius: Float = 5
+    public var perceptionRadius: BFloat = 5
     /// Minimum separation between drones.
-    public var minSeparationDistance: Float = 1
+    public var minSeparationDistance: BFloat = 1
     /// The maximum steering capability of the drone.
-    public var maxSteerForce: Float = 3
+    public var maxSteerForce: BFloat = 3
     
     /// The weight of the force that attracts the drone to a target node.
-    public var targetForceWeight: Float = 5
+    public var targetForceWeight: BFloat = 5
     
     /// The weight of the force to travel in the same direction as other drones.
-    public var alignmentForceWeight: Float = 2
+    public var alignmentForceWeight: BFloat = 2
     /// The weight of the force that brings the boid closer to other drones.
-    public var cohesionForceWeight: Float = 1
-    /// The weight of the force to keep a separation Float between other drones.
-    public var separationForceWeight: Float = 5
+    public var cohesionForceWeight: BFloat = 1
+    /// The weight of the force to keep a separation BFloat between other drones.
+    public var separationForceWeight: BFloat = 5
     
     /// The weight of the force to avoid obstacles.
-    public var avoidanceForceWeight: Float = 50
+    public var avoidanceForceWeight: BFloat = 50
     /// The distance to which the drone recognizes obstacles.
-    public var avoidDistance: Float = 1
+    public var avoidDistance: BFloat = 1
     
     /// An array of the drone's percieved directions in a spherical radius with a magnitude of 1.
     private(set) var directions: [(asVector: SCNVector3, asEulerAngles: SCNVector3)] = []
@@ -45,21 +45,21 @@ public struct BoidSettings {
     public mutating func setDirections (_ directionCount: Int) {
         directions.removeAll()
         
-        let goldenRatio: Float = (1 + sqrtf(5)) / 2
-        let angleIncrement: Float = (2 * .pi) * goldenRatio
+        let goldenRatio: BFloat = (1 + sqrt(5)) / 2
+        let angleIncrement: BFloat = (2 * .pi) * goldenRatio
         
         for i in 0..<directionCount {
             // Ratio for spreading
-            let ratio = Float(i) / Float(directionCount)
+            let ratio = BFloat(i) / BFloat(directionCount)
             
             // Angles
-            let polarAngle: Float = (acosf(1 - 2 * ratio)).truncatingRemainder(dividingBy: .pi)
-            let azimuthalAngle: Float = (Float(angleIncrement) * Float(i)).truncatingRemainder(dividingBy: 2 * .pi)
+            let polarAngle: BFloat = (acos(1 - 2 * ratio)).truncatingRemainder(dividingBy: .pi)
+            let azimuthalAngle: BFloat = (BFloat(angleIncrement) * BFloat(i)).truncatingRemainder(dividingBy: 2 * .pi)
             
             // Cartesian
-            let x = sinf(polarAngle) * cosf(azimuthalAngle)
-            let y = cosf(polarAngle)
-            let z = sinf(polarAngle) * sinf(azimuthalAngle)
+            let x = sin(polarAngle) * cos(azimuthalAngle)
+            let y = cos(polarAngle)
+            let z = sin(polarAngle) * sin(azimuthalAngle)
             
             // Store as vector/angular options
             let direction = SCNVector3(0, azimuthalAngle, polarAngle)

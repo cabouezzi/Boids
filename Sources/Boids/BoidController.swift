@@ -18,29 +18,33 @@ public struct BoidFlockingData {
     
 }
 
-public class DroneController{
-    open var boids: [any Boid] = []
+public class BoidController {
+    open var boids: [any Boid]
     
-    func updateDrones(in world: SCNPhysicsWorld) {
+    public init(boids: [any Boid] = []) {
+        self.boids = boids
+    }
+    
+    final public func updateDrones(in world: SCNPhysicsWorld) {
         for boid in boids {
             boid.updateDroning(world, droneController: self)
         }
     }
     
-    func followTarget(_ target: SCNNode?) {
+    final public func followTarget(_ target: SCNNode?) {
         for boid in boids {
             boid.droneTarget = target
         }
     }
     
-    func setBoidSettings(_ settings: BoidSettings) {
+    final public func setBoidSettings(_ settings: BoidSettings) {
         for boid in boids {
             boid.boidSettings = settings
         }
     }
     
-    func closestBoid(to boid: Boid) -> Boid? {
-        var closestDistance: Float?
+    final public func closestBoid(to boid: Boid) -> Boid? {
+        var closestDistance: BFloat?
         var closestBoid:( any Boid)?
         
         for other in boids where other !== boid {
@@ -56,11 +60,11 @@ public class DroneController{
         return closestBoid
     }
     
-    func flockingDataForBoid(_ boid: Boid) -> BoidFlockingData {
+    final public func flockingDataForBoid(_ boid: Boid) -> BoidFlockingData {
         var flockmatesInView: Int = 0
         var flockmatesCenter = SCNVector3.zero
         var averageFlockDirection = SCNVector3.zero
-        var averageSeparationDistance: Float = 0
+        var averageSeparationDistance: BFloat = 0
         
         //Scan for neighboring drones
         for other in boids where other !== boid {
@@ -82,9 +86,9 @@ public class DroneController{
                                     averageSeparationDirection: .zero)
         }
         
-        flockmatesCenter = flockmatesCenter / Float(flockmatesInView)
-        averageFlockDirection = averageFlockDirection / Float(flockmatesInView)
-        averageSeparationDistance = averageSeparationDistance / Float(flockmatesInView)
+        flockmatesCenter = flockmatesCenter / BFloat(flockmatesInView)
+        averageFlockDirection = averageFlockDirection / BFloat(flockmatesInView)
+        averageSeparationDistance = averageSeparationDistance / BFloat(flockmatesInView)
         
         // Clips magnitude to minimum separation
         if averageSeparationDistance < boid.boidSettings.minSeparationDistance {

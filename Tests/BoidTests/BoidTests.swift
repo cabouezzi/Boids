@@ -1,5 +1,5 @@
 import XCTest
-@testable import Boid
+@testable import Boids
 
 final class BoidTests: XCTestCase {
     func testExample() throws {
